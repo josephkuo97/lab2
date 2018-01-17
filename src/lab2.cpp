@@ -59,6 +59,7 @@ double problem2() {
 void problem3() {
     enum Gender {male, female, other, unknown};
     Gender friend_gender = unknown;
+
     char in_gender;
     string friend_name;
 
@@ -120,6 +121,103 @@ void problem45() {
         cout << "I hope you're enjoying retirement!" << endl;
 }
 
+/* Write a program that converts spelled-out numbers such as “zero” and “two” into digits,
+ * such as 0 and 2. Do this for values 0-4. Write out, “not a number I know” if the user
+ * enters something that doesn’t correspond to a value.
+ */
+void problem6() {
+    string value;
+    cout << "Please enter an integer between 0-4: ";
+    cin >> value;
+
+    if (value == "zero" || value == "Zero")
+        cout << "The value " <<value<< " equals 0. \n";
+    else if (value == "one" || value == "One")
+        cout << "The value " <<value<< " equals 1. \n";
+    else if (value == "two" || value == "Two")
+        cout << "The value " <<value<< " equals 2. \n";
+    else if (value == "three" || value == "Three")
+        cout << "The value " <<value<< " equals 3. \n";
+    else if (value == "four" || value == "Four")
+        cout << "The value " <<value<< " equals 4. \n";
+    else
+        simple_error("not a number I know");
+}
+
+/* Write a program that prompts the user to enter three integer values, and then
+ * outputs the values in numerical sequence separated by commas. So, if the user enters
+ * the values “10 4 6”, the output should be “4, 6, 10”. If two values are the same,
+ * they should just be ordered together. So, the input “4 5 4” should give “4, 4, 5”.
+ */
+void problem7() {
+    int a, b, c;
+    double biggest;
+    double smallest;
+    double middle;
+
+    cout << "Please enter 3 integers:";
+    cin >> a >> b >> c;
+
+    if(!cin)
+        simple_error("not a number I know");
+    else
+        biggest = max(max(a,b),c);
+    smallest = min(min(a,b),c);
+    if ((a>=b && a<=c) || (a>=c && a<=b))
+        middle = a;
+    else if ((b>=a && b<=c) || (b>=c && b<=a))
+        middle = b;
+    else if ((c>=a && c<=b) || (c>=b && c<=a))
+        middle = c;
+    cout << "The order is " <<smallest<< ", " <<middle<< ", " <<biggest<< ". \n";
+}
+
+/* Do the prior exercise, but with three string values. So, if the user enters
+ * the values “Clippers, Suns, Bulls”, the output should be “Bulls, Clippers, Suns.”
+ */
+void problem8() {
+    string x, y, z;
+    int a, b, c;
+    string biggest;
+    string smallest;
+    string middle;
+
+    cout << "Please enter 3 string values: ";
+    cin >> x >> y >> z;
+
+    if (!cin)
+        simple_error("not something I recognize");
+    else
+        a = x[0];
+    b = y[0];
+    c = z[0];
+    if (a>=b && a<=c && c>=b) { // b<a<c
+        middle = x;
+        smallest = y;
+        biggest = z; }
+    else if (a>=c && a<=b && b>=c) {// c<a<b
+        middle = x;
+        smallest = z;
+        biggest = y; }
+    else if (b>=a && b<=c && c>=a) { // a<b<c
+        middle = y;
+        smallest = x;
+        biggest = z; }
+    else if (b>=c && b<=a && a>=c) { // c<b<a
+        middle = y;
+        smallest = z;
+        biggest = x; }
+    else if (c>=a && c<=b && b>=a) { // a<c<b
+        middle = z;
+        smallest = x;
+        biggest = y;}
+    else if (c>=b && c<=a && a>=c) {// b<c<a
+        middle = z;
+        smallest = y;
+        biggest = x; }
+    cout << "The order is " <<smallest<< ", " <<middle<< ", " <<biggest<< ". \n";
+}
+
 // This is the review portion of the lab.
 int illegalStatements() {
     /* Start here! */
@@ -152,6 +250,14 @@ int main() {
     cout << ">> I'm going to run lab problem 4/5 now:" << endl;
     problem45();
 
+    cout << ">> I'm going to run lab problem 6 now:" << endl;
+    problem6();
+
+    cout << ">> I'm going to run lab problem 7 now:" << endl;
+    problem7();
+
+    cout << ">> I'm going to run lab problem 7 now:" << endl;
+    problem8();
+
     return 0; // Lets the operating system know everything ran successfully.
 }
-
